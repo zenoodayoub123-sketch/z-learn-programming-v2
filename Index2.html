@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="نسخة Alpha من منصة Z Learn Programming، منصة تعليمية عربية تهدف إلى تعليم البرمجة للمبتدئين خطوة بخطوة، مع التركيز على بناء عقلية حل المشكلات وتحفيز الطلاب.">
+    <title>Z Learn Programming - نسخة Alpha</title>
+    <style>
+        /* إعدادات عامة للتصميم الداكن والـ RTL */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            direction: rtl;
+            text-align: right;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        h1, h2, h3 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* شريط التنقل */
+        nav {
+            background-color: #0f0f23;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+        nav li {
+            display: inline;
+        }
+        nav a {
+            color: #e0e0e0;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #00d4ff;
+        }
+
+        /* قسم الترحيب (Hero) */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            animation: fadeIn 1.5s ease-in;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        .cta-button {
+            background: linear-gradient(135deg, #00d4ff 0%, #007bff 100%);
+            color: #ffffff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 212, 255, 0.3);
+        }
+
+        /* الأقسام العامة */
+        .section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* رسالة من المطور */
+        .developer-message {
+            background-color: #16213e;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* أقسام المنصة (Features) */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .feature-card {
+            background-color: #0f0f23;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #00d4ff;
+            transition: transform 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-note {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        /* قسم تتبع التقدم */
+        .progress-item {
+            margin-bottom: 20px;
+        }
+        .progress-bar {
+            background-color: #333;
+            border-radius: 5px;
+            height: 20px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff 0%, #007bff 100%);
+            transition: width 0.5s ease;
+        }
+        .progress-text {
+            font-weight: bold;
+        }
+
+        /* قسم التواصل */
+        .contact {
+            background-color: #16213e;
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f0f23;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* رسالة للصفحات غير المفعلة */
+        .coming-soon {
+            display: none;
+            background-color: #ff6b6b;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .coming-soon:target {
+            display: block;
+        }
+
+        /* الرسوم المتحركة */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* الاستجابة للأجهزة المحمولة */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .section {
+                padding: 50px 0;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav>
+        <div class="container">
+            <h3>Z Learn Programming</h3>
+            <ul>
+                <li><a href="#hero">الرئيسية</a></li>
+                <li><a href="#coming-soon">عن المنصة</a></li>
+                <li><a href="#coming-soon">المسارات</a></li>
+                <li><a href="#contact">تواصل معنا</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- قسم الترحيب -->
+    <section class="hero" id="hero">
+        <div class="
